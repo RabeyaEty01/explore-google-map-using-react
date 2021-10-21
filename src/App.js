@@ -1,23 +1,30 @@
 import logo from './logo.svg';
 import './App.css';
+import Direction from './component/Direction';
+import { useRef, useState } from 'react';
 
 function App() {
+  const [origin, setOrigin] = useState('');
+  const [destination, setDestination] = useState('');
+
+  const originRef = useRef('');
+  const destinationRef = useRef('');
+
+  const handleDirection = e => {
+    setOrigin(originRef.current.value);
+    setDestination(destinationRef.current.value);
+    e.preventDefault();
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={handleDirection}>
+        <input type="text" name="" ref={originRef} placeholder="Start from" id="" />
+        <br />
+        <input type="text" ref={destinationRef} name="" placeholder="Destination" id="" />
+        <br />
+        <input type="submit" name="" value="Get Direction" id="" />
+      </form>
+      <Direction origin={origin} destination={destination}></Direction>
     </div>
   );
 }
